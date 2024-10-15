@@ -160,8 +160,9 @@ education_sex_table = data  |>
   summarize(count = n_distinct(seqn))  |> 
   pivot_wider(names_from = sex, values_from = count, values_fill = 0)
 
-knitr::kable(education_sex_table, caption = "Number of Men and Women in Each Education Category")
+knitr::kable(education_sex_table)
 ```
+
 Comments:
 
 The above table presents in the “less than high school” group, there are slightly more women (28) than men (27), indicating a near balance in this educational attainment level. In the “high school equivalent” category, the number of men (35) exceeds that of women (23), highlighting a gender disparity in this education level. Conversely, in the “more than high school” category, the numbers for men (56) and women (59) are closely matched, with women slightly outnumbering men. The data suggests that while there are some gender imbalances in educational attainment, particularly at the high school level, the distribution becomes more equitable at higher education levels.
@@ -198,8 +199,7 @@ ggplot(total_activity, aes(x = age, y = total_mims, color = sex)) +
   geom_point() +
   geom_smooth(method = "lm",se = FALSE) +
   facet_wrap(~ education) +
-  labs(title = "Total Activity vs. Age by Education and Sex", x = "Age", y = "Total Activity (MIMS)") +
-  theme_minimal()
+  labs(title = "Total Activity vs. Age by Education and Sex", x = "Age", y = "Total Activity (MIMS)")
 ```
 
 Comments:
@@ -279,8 +279,9 @@ ride_summary = combined_data  |>
     names_from = member_casual, 
     values_from = total_rides)
 
-knitr::kable(ride_summary, caption = "Total Number of Rides by Year, Month, and Membership Status")
+knitr::kable(ride_summary)
 ```
+
 Comment:
 
 The above table shows both casual and member rides increased significantly from 2020 to 2024. Member rides, in particular, saw a marked rise, especially in July 2024, with over 36,000 rides compared to about 15,000 in July 2020. Casual rides also increased, though the growth was more moderate, with a notable spike in July 2024. This suggests growing overall usage of Citi Bike, especially among members.
@@ -296,7 +297,7 @@ top_stations_july_2024 = july_2024_data  |>
   arrange(desc(num_rides))  |> 
   head(5)
 
-knitr::kable(top_stations_july_2024, caption = "Top 5 Starting Stations in July 2024")
+knitr::kable(top_stations_july_2024)
 ```
 
 ### Effects of Day, Month, and Year on Median Ride Duration
