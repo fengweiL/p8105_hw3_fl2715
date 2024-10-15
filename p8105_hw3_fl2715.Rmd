@@ -267,7 +267,7 @@ july_2024_data=read_csv(
 combined_data = bind_rows(jan_2020_data, july_2020_data, jan_2024_data, july_2024_data)
 ```
 
-### Total Number of Rides by Year, Month, and Rider Type
+### Total Number of Rides by Year, Month, and Membership Status
 
 We produce a reader-friendly table showing the total number of rides in each combination of year and month separating casual riders and Citi Bike members.
 
@@ -284,5 +284,19 @@ knitr::kable(ride_summary, caption = "Total Number of Rides by Year, Month, and 
 Comment:
 
 The above table shows both casual and member rides increased significantly from 2020 to 2024. Member rides, in particular, saw a marked rise, especially in July 2024, with over 36,000 rides compared to about 15,000 in July 2020. Casual rides also increased, though the growth was more moderate, with a notable spike in July 2024. This suggests growing overall usage of Citi Bike, especially among members.
+
+### Top 5 Most Popular Starting Stations for July 2024
+
+Now we make a table showing the 5 most popular starting stations for July 2024; include the number of rides originating from these stations.
+
+```{r}
+top_stations_july_2024 = july_2024_data  |> 
+  group_by(start_station_name)  |> 
+  summarize(num_rides = n())  |> 
+  arrange(desc(num_rides))  |> 
+  head(5)
+
+knitr::kable(top_stations_july_2024, caption = "Top 5 Starting Stations in July 2024")
+```
 
 
