@@ -325,4 +325,22 @@ January: Median ride durations in 2020 (purple line) are consistently longer tha
 
 July: Both years show longer median ride duration compared to January. In 2020, there was a notable increase in duration toward the weekend, with Sunday having the longest rides. In 2024, the ride duration also increased towards the weekend, but they remain noticeably shorter than in 2020.
 
+### Impact of Month, Membership Status, and Bike Type on Ride Duration in 2024
+
+Finally, we make a figure that shows the impact of month, membership status, and bike type on the distribution of ride duration for data in 2024.
+
+```{r}
+data_2024 = combined_data  |> 
+  filter(year == 2024)
+
+ggplot(data_2024, aes(x = duration, fill = member_casual)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(rideable_type ~ month) +
+  labs(title = "Impact of Month, Membership Status, and Bike Type on Ride Duration (2024)",
+       x = "Ride Duration", y = "Density", fill = "Membership Status")
+```
+
+Comment:
+
+The plot illustrates the distribution of ride duration, categorized by bike type (classic vs. electric), membership status (casual vs. member), and month (January vs. July) for 2024. Across both months and bike types, casual users (in purple) tend to have longer ride duration compared to members (in yellow), who generally have shorter, more consistent rides. Ride duration is highly concentrated at lower times (0–20) for all groups, but the density for casual riders is more spread out with longer tails, particularly for electric bikes. Additionally, ride duration patterns seem to remain fairly similar between January and July for electric bikes, while with minor shifts in density for classic bikes.
 
