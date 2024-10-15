@@ -184,3 +184,25 @@ Comments:
 
 In all three panels, females (yellow) generally outnumber males (purple) at older ages for those with higher education or less. Also, for those with high school equivalent or less education level, the age distribution of males peaks earlier than females. In the "more than high school" group, the distributions of male and female both peak at about age 31, while male dominate at older ages (60+).
 
+### Total Activity vs. Age Plot
+
+We aggregate across minutes to create a total activity variable for each participant. And we plot these total activities (y-axis) against age (x-axis), with comparing men to women and having separate panels for each education level. Also, we include a trend line or a smooth to illustrate differences.
+
+```{r}
+total_activity = data  |> 
+  group_by(seqn, sex, education, age)  |> 
+  summarise(total_mims = sum(mims, na.rm = TRUE))
+
+# Plot total activity vs. age, comparing men and women, and faceting by education level
+ggplot(total_activity, aes(x = age, y = total_mims, color = sex)) +
+  geom_point() +
+  geom_smooth(method = "lm",se = FALSE) +
+  facet_wrap(~ education) +
+  labs(title = "Total Activity vs. Age by Education and Sex", x = "Age", y = "Total Activity (MIMS)") +
+  theme_minimal()
+```
+
+Comments:
+
+In all categories, physical activity declines with age, but the decline is steeper for female (yellow) especially for those with less than a high school education. Females (yellow) seem to maintain higher activity levels later in life, particularly among those with more education. There is greater variability in total activity among older individuals in all groups, with distinct linear trends highlighting the sex differences.
+
