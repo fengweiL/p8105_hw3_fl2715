@@ -206,3 +206,27 @@ Comments:
 
 In all categories, physical activity declines with age, but the decline is steeper for female (yellow) especially for those with less than a high school education. Females (yellow) seem to maintain higher activity levels later in life, particularly among those with more education. There is greater variability in total activity among older individuals in all groups, with distinct linear trends highlighting the sex differences.
 
+### 24-Hour Activity Time Course Plot
+
+Now we make a three-panel plot that shows the 24-hour activity time courses for each education level and use color to indicate sex.
+
+```{r}
+hourly_data = data  |> 
+  mutate(hour = as.numeric(time) / 60) |> 
+  group_by(education, sex, hour)  |> 
+  summarize(mean_mims = mean(mims), .groups = "drop")
+
+ggplot(hourly_data, aes(x = hour, y = mean_mims, color = sex)) +
+  geom_point(alpha = .2) + 
+  geom_smooth(se = FALSE, aes(group = sex)) +
+  facet_wrap(~ education, ncol = 1) +
+  labs(title = "24-Hour Activity Time Courses by Education Level and Sex",
+       x = "Hour of the Day",
+       y = "Mean MIMS",
+       color = "Sex")
+```
+
+Conclusion:
+
+This graph presents the average physical activity across a 24-hour period, divided by education level and sex. Across all education levels, activity peaks about between 7:00 and 18:00, with males (purple) and females (yellow) showing similar patterns. However, females consistently demonstrate higher activity levels throughout the day, especially in the group with more than a high school education. As expected, the night-time hours show very low activity. The overall trends suggest that daily activity follows similar patterns regardless of education level, but females generally exhibit higher levels of physical activity across the board.
+
