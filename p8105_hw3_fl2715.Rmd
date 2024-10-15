@@ -230,3 +230,40 @@ Conclusion:
 
 This graph presents the average physical activity across a 24-hour period, divided by education level and sex. Across all education levels, activity peaks about between 7:00 and 18:00, with males (purple) and females (yellow) showing similar patterns. However, females consistently demonstrate higher activity levels throughout the day, especially in the group with more than a high school education. As expected, the night-time hours show very low activity. The overall trends suggest that daily activity follows similar patterns regardless of education level, but females generally exhibit higher levels of physical activity across the board.
 
+## Problem 3
+
+### Import, Clean, and Tidy Data
+```{r}
+#Import data
+jan_2020_data=read_csv(
+  "data/Jan 2020 Citi.csv") |> 
+  janitor::clean_names() |> 
+  mutate(
+    year=2020,
+    month="January")
+
+july_2020_data=read_csv(
+  "data/July 2020 Citi.csv") |> 
+  janitor::clean_names() |> 
+  mutate(
+    year=2020,
+    month="July")
+
+jan_2024_data=read_csv(
+  "data/Jan 2024 Citi.csv") |> 
+  janitor::clean_names() |> 
+  mutate(
+    year=2024,
+    month="January")
+
+july_2024_data=read_csv(
+  "data/July 2024 Citi.csv") |> 
+  janitor::clean_names() |> 
+  mutate(
+    year=2024,
+    month="July")
+
+# merge the data
+combined_data = bind_rows(jan_2020_data, july_2020_data, jan_2024_data, july_2024_data)
+```
+
