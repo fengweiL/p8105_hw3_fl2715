@@ -150,3 +150,19 @@ data=merge(
   )
 ```
 
+### Table: Number of Men and Women in Each Education Category
+
+We produce a reader-friendly table for the number of men and women in each education category.
+
+```{r}
+education_sex_table = data  |> 
+  group_by(education, sex)  |> 
+  summarize(count = n_distinct(seqn))  |> 
+  pivot_wider(names_from = sex, values_from = count, values_fill = 0)
+
+knitr::kable(education_sex_table, caption = "Number of Men and Women in Each Education Category")
+```
+Comments:
+
+The above table presents in the “less than high school” group, there are slightly more women (28) than men (27), indicating a near balance in this educational attainment level. In the “high school equivalent” category, the number of men (35) exceeds that of women (23), highlighting a gender disparity in this education level. Conversely, in the “more than high school” category, the numbers for men (56) and women (59) are closely matched, with women slightly outnumbering men. The data suggests that while there are some gender imbalances in educational attainment, particularly at the high school level, the distribution becomes more equitable at higher education levels.
+
