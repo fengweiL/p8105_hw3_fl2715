@@ -166,3 +166,21 @@ Comments:
 
 The above table presents in the “less than high school” group, there are slightly more women (28) than men (27), indicating a near balance in this educational attainment level. In the “high school equivalent” category, the number of men (35) exceeds that of women (23), highlighting a gender disparity in this education level. Conversely, in the “more than high school” category, the numbers for men (56) and women (59) are closely matched, with women slightly outnumbering men. The data suggests that while there are some gender imbalances in educational attainment, particularly at the high school level, the distribution becomes more equitable at higher education levels.
 
+### Age Distribution Visualization
+
+We create a visualization of the age distributions for men and women in each education category. 
+
+```{r}
+data_unique = data  |> 
+  distinct(seqn, .keep_all = TRUE)
+
+ggplot(data_unique, aes(x = age, fill = sex)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(~ education) +
+  labs(title = "Age Distribution by Education and Sex", x = "Age", y = "Density")
+```
+
+Comments:
+
+In all three panels, females (yellow) generally outnumber males (purple) at older ages for those with higher education or less. Also, for those with high school equivalent or less education level, the age distribution of males peaks earlier than females. In the "more than high school" group, the distributions of male and female both peak at about age 31, while male dominate at older ages (60+).
+
